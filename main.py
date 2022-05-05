@@ -316,5 +316,5 @@ def pos(town):
 
 ###########################################################################################################
 
-TOKEN = 'OTUzMzM5MjIxMzQ5OTI0OTc0.GoYzXn.tbLz4wfI0J6sDxZitJslimz3H5UnOQbSRaxGKs'
+TOKEN = 'Your Token'
 client.run(TOKEN)
