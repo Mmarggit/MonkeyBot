@@ -199,6 +199,17 @@ async def film(ctx, *movie):
     emb.add_field(name='Сборы:', value=f'{money}')
     emb.set_thumbnail(url=thumbnail)
     emb.set_image(url=image)
+    embs = []
+    for i in range(0, 4):
+        person = actors[i]
+        id = person.getID()
+        person = moviesDb.get_person(id)
+        thumbnail = person['headshot']
+        image = person['full-size headshot']
+        ember = discord.Embed(title=f'{actors[0]}')
+        ember.set_image(url=image)
+        ember.set_thumbnail(url=thumbnail)
+        embs.append(ember)
     await ctx.send(embed=emb, components=[[
                        Button(style=ButtonStyle.green, label=f'{actors[0]}', emoji='✔'),
                        Button(style=ButtonStyle.green, label=f'{actors[1]}', emoji='✔'),
@@ -208,45 +219,13 @@ async def film(ctx, *movie):
         response = await client.wait_for('button_click')
         if response.channel == ctx.channel:
             if response.component.label == f'{actors[0]}':
-                person = actors[0]
-                id = person.getID()
-                person = moviesDb.get_person(id)
-                thumbnail = person['headshot']
-                image = person['full-size headshot']
-                emb = discord.Embed(title=f'{actors[0]}')
-                emb.set_image(url=image)
-                emb.set_thumbnail(url=thumbnail)
-                await response.respond(embed=emb)
+                await response.respond(embed=embs[0])
             elif response.component.label == f'{actors[1]}':
-                person = actors[1]
-                id = person.getID()
-                person = moviesDb.get_person(id)
-                thumbnail = person['headshot']
-                image = person['full-size headshot']
-                emb = discord.Embed(title=f'{actors[1]}')
-                emb.set_image(url=image)
-                emb.set_thumbnail(url=thumbnail)
-                await response.respond(embed=emb)
+                await response.respond(embed=embs[1])
             elif response.component.label == f'{actors[2]}':
-                person = actors[2]
-                id = person.getID()
-                person = moviesDb.get_person(id)
-                thumbnail = person['headshot']
-                image = person['full-size headshot']
-                emb = discord.Embed(title=f'{actors[2]}')
-                emb.set_image(url=image)
-                emb.set_thumbnail(url=thumbnail)
-                await response.respond(embed=emb)
+                await response.respond(embed=embs[2])
             elif response.component.label == f'{actors[3]}':
-                person = actors[3]
-                id = person.getID()
-                person = moviesDb.get_person(id)
-                thumbnail = person['headshot']
-                image = person['full-size headshot']
-                emb = discord.Embed(title=f'{actors[3]}')
-                emb.set_image(url=image)
-                emb.set_thumbnail(url=thumbnail)
-                await response.respond(embed=emb)
+                await response.respond(embed=embs[3])
 
 
 
@@ -337,5 +316,5 @@ def pos(town):
 
 ###########################################################################################################
 
-TOKEN = 'Your Token'
+TOKEN = 'OTUzMzM5MjIxMzQ5OTI0OTc0.GoYzXn.tbLz4wfI0J6sDxZitJslimz3H5UnOQbSRaxGKs'
 client.run(TOKEN)
